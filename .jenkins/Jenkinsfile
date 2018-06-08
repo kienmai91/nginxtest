@@ -16,11 +16,9 @@ pipeline {
       }
     }
     stage('Build Image') {
-      agent any
-      steps {
-	docker.build("testkien", "--build-arg x=y .")
+          docker.build("testkien", "--build-arg x=y .")
 
 }
 }
 }
-}
+
