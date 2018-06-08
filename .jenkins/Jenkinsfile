@@ -9,7 +9,7 @@ pipeline {
       }
       steps {
         echo "${env.BUILD_ID}"
-	echo "${caller.env.BRANCH_NAME}"
+	echo "${env.BRANCH_NAME}"
       }
     }
 }
