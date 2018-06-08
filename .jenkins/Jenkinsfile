@@ -1,3 +1,15 @@
-node {
-  echo 'The pipeline started'
+pipeline {
+  agent none
+  stages {
+    stage('Nginx Image') {
+      agent {
+        docker {
+          image 'nginx'
+        }
+      }
+      steps {
+        echo "${env.BUILD_ID}"
+	echo "${caller.env.BRANCH_NAME}"
+      }
+    }
 }
