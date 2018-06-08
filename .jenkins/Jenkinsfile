@@ -12,13 +12,13 @@ pipeline {
       steps {
         echo "${env.BUILD_ID}"
 	echo "${params.ENV}"
-        echo "${env.BRANCH_NAME}"
+        echo "${BRANCH_NAME}"
       }
     }
     stage('Build Image') {
       agent any
       steps {
-      sh 'docker build -t kienapp-${params.ENV}-${env.BRANCH_NAME}:${env.BUILD_ID}'
+      sh 'docker build -t kienapp-${params.ENV}-${BRANCH_NAME}:${env.BUILD_ID}'
 	    }
 }
 }
