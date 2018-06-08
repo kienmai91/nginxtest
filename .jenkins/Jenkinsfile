@@ -18,7 +18,7 @@ pipeline {
     stage('Build Image') {
       agent any
       steps {
-      sh 'docker build -t kienapp:v3'
+      sh 'docker build -t kienapp:${env.BUILD_ID} $GIT_URL'
 	    }
 }
 }
