@@ -1,5 +1,7 @@
 pipeline {
   agent none
+  parameters { string(name: 'ENV', defaultValue: 'dev', description: '') 
+}
   stages {
     stage('Nginx Image') {
       agent {
@@ -9,8 +11,15 @@ pipeline {
       }
       steps {
         echo "${env.BUILD_ID}"
-	echo "${env.BRANCH_NAME}"
+	echo "${params.ENV}"
+        echo "${env.BRANCH_NAME}"
       }
     }
+    stage('Build Image') {
+      agent any
+      steps {
+      sh 'docker build -t kienapp-${params.ENV}-${env.BRANCH_NAME}:${env.BUILD_ID}'
+	    }
+}
 }
 }
