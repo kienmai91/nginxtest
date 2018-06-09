@@ -1,15 +1,13 @@
 node {
   checkout scm
   stage('Package') {
-    dir('webapp') {
       sh 'echo $PATH'
-   }
+   
   }
 
   stage('Create Docker Image') {
-    dir('webapp') {
       docker.build("testapp:${env.BUILD_NUMBER}")
-    }
+   
   }
 
   stage ('Run Application') {
