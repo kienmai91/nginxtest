@@ -29,6 +29,9 @@ node {
       echo 'build done'
     }
   }
+  stage('Run Application') {
+    sh("docker rm -f nginx ||:")
+    sh("docker run --name nginx -d -p 8081:80 testapp:${env.BUILD_NUMBER} ||:") 
 
 }
 
