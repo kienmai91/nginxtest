@@ -1,3 +1,6 @@
+
+
+
 node {
   checkout scm
   stage('Package') {
@@ -37,8 +40,8 @@ node {
   try {
         build(job: 'project2', wait: false)
            }
-  catch(err) { echo $err}
+  catch(err) { echo $err }
       
-  finally { echo Done}
+  finally {}
 }
 }
