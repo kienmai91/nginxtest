@@ -38,7 +38,7 @@ node {
   }
   stage('Trigger test') {
   try {
-        build(job: 'project2', wait: false)
+        build(job: 'project2', wait: true)
            }
   catch(err) { echo $err }
       
