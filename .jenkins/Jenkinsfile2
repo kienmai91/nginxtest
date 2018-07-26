@@ -46,6 +46,5 @@ node {
            }
   catch(error) { echo "$error" }
       
-  finally {}
 }
 }
