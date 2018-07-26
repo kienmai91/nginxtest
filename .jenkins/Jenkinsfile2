@@ -40,7 +40,7 @@ node {
   try {
         build(job: 'project2', wait: true)
            }
-  catch(err) { echo $err }
+  catch(error) { echo "$error" }
       
   finally {}
 }
