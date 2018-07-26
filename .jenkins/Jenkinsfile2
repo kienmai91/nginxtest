@@ -38,7 +38,10 @@ node {
   }
   stage('Trigger test') {
   try {
-        build(job: 'project2', wait: true)
+     b = build(job: 'project2', wait: true).result
+     if(b == 'FAILURE'){
+     error "Build failed"
+      }
            }
   catch(error) { echo "$error" }
       
