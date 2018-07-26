@@ -45,7 +45,7 @@ node {
       }
            }
   catch(error) { 
-      echo $error
+      echo "$error"
       currentBuild.result = "FAILURE"  }
       
 }
