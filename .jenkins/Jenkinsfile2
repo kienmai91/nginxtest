@@ -37,6 +37,8 @@ node {
   try {
         build(job: 'project2', wait: false)
            }
+  catch(err) { echo $err}
       }
+  finally { echo Done}
 }
 
