@@ -40,7 +40,8 @@ node {
   try {
      b = build(job: 'project2', wait: true).result
      if(b == 'FAILURE'){
-     error "Build failed"
+     echo "Build failed"
+     
       }
            }
   catch(error) { echo "$error" }
