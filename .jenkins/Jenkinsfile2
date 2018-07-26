@@ -33,11 +33,10 @@ node {
     sh("docker rm -f nginx ||:")
     sh("docker run --name nginx -d -p 8081:80 testapp:${env.BUILD_NUMBER} ||:") 
   }
-  stage ('Invoke_pipeline') {
-            steps {
-            build job: 'project2'
-		}
-        }
-
+  post {
+    success{
+        build(job: 'project2', wait: false)
+           }
+      }
 }
 
