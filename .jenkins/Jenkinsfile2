@@ -9,7 +9,7 @@ node {
   }
 
   stage('Create Docker Image') {
-      docker.build("testapp:${env.BUILD_NUMBER}")
+   app =  docker.build("testapp:${env.BUILD_NUMBER}")
    
   }
 
@@ -33,12 +33,14 @@ node {
     }
   }
 
+
   stage('push new image to docker hub') {
-        withCredentials([zip(credentialsId: 'docker-config',
-                                  variable: 'DOCKER_CONFIG')]) {
-            echo 'Pushing to Docker Hub'
-            container.push()}
-}
+  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+      app.push("${env.BUILD_NUMBER}")
+      app.push("latest")
+	}
+
+    }
 }   
 
 
