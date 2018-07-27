@@ -43,8 +43,8 @@ node {
    stage('Run Application') { 
  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
     sh("docker rm -f nginx ||:")
-    agent { docker 'kienmai91/kienrepo:latest' }
-  }
+    docker.image("kienmai91/kienrepo:latest") 
+ }
 }
   stage('Trigger test') {
   try {
