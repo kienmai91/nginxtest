@@ -13,25 +13,6 @@ node {
    
   }
 
-  stage ('Run Application') {
-    try {
-
-      docker.image("kienmai91/kienrepo:${env.BUILD_NUMBER}").inside {
-
-      sh "echo ${env.BUILD_NUMBER}"
-
-}
-
-
-
-
-    } catch (error) {
-    } finally {
-      // Stop and remove database container here
-      //sh 'docker-compose stop db'
-      echo 'build done'
-    }
-  }
 
 
   stage('push new image to docker hub') {
@@ -43,7 +24,7 @@ node {
    stage('Run Application') { 
  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
     sh("docker rm -f nginx ||:")
-    sh("docker run -d -p 8081:80 kienmai91/kienrepo ||:")
+    sh("docker run --name nginx  -d -p 8081:80 kienmai91/kienrepo ||:")
  }
 }
   stage('Trigger test') {
