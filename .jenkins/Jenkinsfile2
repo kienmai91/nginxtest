@@ -9,14 +9,14 @@ node {
   }
 
   stage('Create Docker Image') {
-   app =  docker.build("testapp:${env.BUILD_NUMBER}")
+   app =  docker.build("kienmai91/kienrepo:${env.BUILD_NUMBER}")
    
   }
 
   stage ('Run Application') {
     try {
 
-      docker.image("testapp:${env.BUILD_NUMBER}").inside {
+      docker.image("kienmai91/kienrepo:${env.BUILD_NUMBER}").inside {
 
       sh "echo ${env.BUILD_NUMBER}"
 
