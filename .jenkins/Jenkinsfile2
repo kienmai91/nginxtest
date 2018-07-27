@@ -40,10 +40,12 @@ node {
 	}
 
     }
-   stage('Run Application') {
+   stage('Run Application') { 
+ docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
     sh("docker rm -f nginx ||:")
     sh("docker run --name nginx -d -p 8081:80 kienmai91/kienrepo:latest ||:")
   }
+}
   stage('Trigger test') {
   try {
      b = build(job: 'project2', propagate: true).result
