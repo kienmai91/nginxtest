@@ -36,7 +36,7 @@ node {
 
   stage('push new image to docker hub') {
   docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-      docker.push("kienmai91/kienrepo:latest")
+      docker.push("latest")
 	}
 
     }
