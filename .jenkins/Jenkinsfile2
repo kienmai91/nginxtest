@@ -36,11 +36,29 @@ node {
 
   stage('push new image to docker hub') {
   docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-      app.push("${env.BUILD_NUMBER}")
-      app.push("latest")
+      docker.push("kienmai91/kienrepo:latest")
 	}
 
     }
+   stage('Run Application') {
+    sh("docker rm -f nginx ||:")
+    sh("docker run --name nginx -d -p 8081:80 kienmai91/kienrepo:latest ||:")
+  }
+  stage('Trigger test') {
+  try {
+     b = build(job: 'project2', propagate: true).result
+     if(b == 'FAILURE'){
+     echo "Build failed"
+
+      }
+           }
+  catch(error) {
+      echo "$error"
+      currentBuild.result = "FAILURE"  }
+
+
+
+}
 }   
 
 
