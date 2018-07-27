@@ -43,7 +43,7 @@ node {
    stage('Run Application') { 
  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
     sh("docker rm -f nginx ||:")
-    docker.image("kienmai91/kienrepo:latest") 
+    docker.image("kienmai91/kienrepo:latest").withRun('-p 8081:80') 
  }
 }
   stage('Trigger test') {
