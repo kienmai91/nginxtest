@@ -10,12 +10,12 @@ node ('appstg') {
 }
   stage('Build Docker Image') {
    app =  docker.build("phpfpmwt", "-f phpdockerfile .")
-   sh("docker tag phpfpmwt 738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt:${env.BUILD_NUMBER}")
+   sh("docker tag phpfpmwt 738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt")
   }
 
   stage('Push Docker Image to ECR') {
        docker.withRegistry('https://738774554664.dkr.ecr.ap-southeast-2.amazonaws.com', 'ecr:ap-southeast-2:ecrphpfpmrepo') {
-       docker.image("738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt:${env.BUILD_NUMBER}").push()
+       docker.image("738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt").push()
   }
   }
  }
