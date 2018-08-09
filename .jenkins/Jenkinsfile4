@@ -4,10 +4,13 @@ node ('appstg') {
       sh 'echo $PATH'
 
   }
-
+ 
+  stage('Clean php-fpm image docker') {
+  sh('docker images | grep phpfpmwt | awk  '{print $3}' |xargs --no-run-if-empty docker rmi -f')
+}
   stage('Build Docker Image') {
-   app =  docker.build("phpfpmwt:${env.BUILD_NUMBER}", "-f phpdockerfile .")
-   sh("docker tag phpfpmwt:latest 738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt:${env.BUILD_NUMBER}")
+   app =  docker.build("phpfpmwt", "-f phpdockerfile .")
+   sh("docker tag phpfpmwt 738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt:${env.BUILD_NUMBER}")
   }
 
   stage('Push Docker Image to ECR') {
