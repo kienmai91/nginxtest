@@ -14,7 +14,7 @@ node ('appstg') {
   }
 
   stage('Push Docker Image to ECR') {
-       docker.withRegistry('https://738774554664.dkr.ecr.ap-southeast-2.amazonaws.com', 'ecr:ap-southeast-2:ecrphpfpmrepo') {
+       docker.withRegistry('https://738774554664.dkr.ecr.ap-southeast-2.amazonaws.com', 'ecrphpfpmrepo') {
        docker.image('738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt:${env.BUILD_NUMBER}').push("${env.BUILD_NUMBER}")
   }
   }
