@@ -1,4 +1,4 @@
-node ('appstg') {
+node () {
   checkout scm
   stage('Package') {
       sh 'echo $PATH'
