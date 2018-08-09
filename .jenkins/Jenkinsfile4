@@ -6,7 +6,7 @@ node ('appstg') {
   }
  
   stage('Clean php-fpm image docker') {
-  sh('docker images | grep phpfpmwt | awk  "{print $3}" |xargs --no-run-if-empty docker rmi -f')
+  sh('docker images | grep phpfpmwt | awk  "{print $3}" |xargs --no-run-if-empty docker rmi -f ||:')
 }
   stage('Build Docker Image') {
    app =  docker.build("phpfpmwt", "-f phpdockerfile .")
