@@ -1,4 +1,4 @@
-node {
+node ('appstg') {
   checkout scm
   stage('Package') {
       sh 'echo $PATH'
@@ -7,6 +7,12 @@ node {
 
   stage('Build Docker Image') {
    app =  docker.build("phpfpmwt:${env.BUILD_NUMBER}", "-f phpdockerfile .")
-
+   sh('docker tag phpfpmwt:latest 738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt:${env.BUILD_NUMBER}')
   }
-}
+
+  stage('Push Docker Image to ECR') {
+       docker.withRegistry('https://738774554664.dkr.ecr.ap-southeast-2.amazonaws.com', 'ecr:ap-southeast-2:ecrphpfpmrepo') {
+       docker.image('phpfpmwt').push("${env.BUILD_NUMBER}")
+  }
+  }
+ }
