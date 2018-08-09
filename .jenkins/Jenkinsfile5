@@ -1,0 +1,14 @@
+node ('appstg') {
+  checkout scm
+  stage('Package') {
+      sh 'echo $PATH'
+
+  }
+ 
+
+  stage('Push Docker Image to ECR') {
+       docker.withRegistry('https://738774554664.dkr.ecr.ap-southeast-2.amazonaws.com', 'ec2:ap-southeast-2:AKIAIN6UCAVNI7JX2Q4A') {
+       docker.image('738774554664.dkr.ecr.ap-southeast-2.amazonaws.com/phpfpmwt:${env.BUILD_NUMBER}').push("${env.BUILD_NUMBER}")
+  }
+  }
+ }
