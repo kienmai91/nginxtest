@@ -1,5 +1,5 @@
 node ('appstg') {
-docker.withRegistry('https://'https://738774554664.dkr.ecr.ap-southeast-2.amazonaws.com, 'ecr:ap-southeast-2:ecrphpfpmrepo') {
+docker.withRegistry('https://738774554664.dkr.ecr.ap-southeast-2.amazonaws.com, 'ecr:ap-southeast-2:ecrphpfpmrepo') {
            
             //build image
             def customImage = docker.build("my-image:${env.BUILD_ID}")
