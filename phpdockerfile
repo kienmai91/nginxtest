@@ -1,0 +1,14 @@
+FROM phpdockerio/php72-fpm:latest
+WORKDIR "/application"
+
+# Install selected extensions and other stuff
+
+COPY app /application
+COPY ./phpdocker/php-fpm/php-ini-overrides.ini /etc/php/7.2/fpm/conf.d/99-overrides.ini
+
+ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN composer install
+RUN chmod 777 -R /application/var/log
+EXPOSE 9000
+CMD ["php-fpm"]
+

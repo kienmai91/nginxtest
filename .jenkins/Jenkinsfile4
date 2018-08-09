@@ -1,0 +1,14 @@
+node ('appstg') {
+  checkout scm
+  stage('Package') {
+      sh 'echo $PATH'
+
+  }
+
+  stage('Build Docker Image') {
+   app =  docker.build('phpfpmwt:${env.BUILD_NUMBER}', '--file phpdockerfile .')
+
+  }
+}
+
+
