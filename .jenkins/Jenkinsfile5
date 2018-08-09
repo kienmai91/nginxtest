@@ -8,7 +8,7 @@ docker.withRegistry('https://ID.ecr.eu-west-1.amazonaws.com', 'ecr:eu-west-1:86c
             customImage.push()
   }
  
-
+}
   
   
  
