@@ -1,4 +1,4 @@
-node () {
+node {
   checkout scm
   stage('Package') {
       sh 'echo $PATH'
@@ -6,9 +6,7 @@ node () {
   }
 
   stage('Build Docker Image') {
-   app =  docker.build('phpfpmwt:${env.BUILD_NUMBER}', '--file phpdockerfile .')
+   app =  docker.build("phpfpmwt:${env.BUILD_NUMBER}", "-f phpdockerfile .")
 
   }
 }
-
-
