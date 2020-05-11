@@ -1,0 +1,48 @@
+format_version: 3
+pipelines:
+  test:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git:
+        git: https://github.com/dockersamples/node-bulletin-board
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+    - stage:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: true
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          job:
+            timeout: 0
+            environment_variables:
+              ABC: hello today
+            tasks:
+            - exec:
+                arguments:
+                - -lah
+                command: ls
+                working_directory: bulletin-board-app
+                run_if: passed
+            - exec:
+                arguments:
+                - -C
+                - docker build -t hehe .
+                command: /bin/bash
+                working_directory: bulletin-board-app
+                run_if: passed
+            - exec:
+                command: printenv
+                run_if: passed
+            - exec:
+                command: /bin/bash
+                arguments:
+                - echo ${ABC}
+                run_if: passed
